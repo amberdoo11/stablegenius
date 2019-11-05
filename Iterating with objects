@@ -1,0 +1,65 @@
+DRILLS
+https://repl.it/@amberdoo11/validate-object-keys-drill
+https://repl.it/@amberdoo11/find-by-id-drill-1
+https://repl.it/@amberdoo11/Enroll-in-summer-school-drill
+https://repl.it/@amberdoo11/Make-student-reports-drill
+
+Iterating through objects
+
+function getTokens(rawString) {
+  // NB: `.filter(Boolean)` removes any falsy items from an array
+  return rawString.toLowerCase().split(/[ ,!.";:-]+/).filter(Boolean).sort();
+}
+function mostFrequentWord(text) {
+  let words = getTokens(text);
+  let wordFrequencies = {};
+  for (let i = 0; i <= words.length; i++) {
+    if (words[i] in wordFrequencies) {
+      wordFrequencies[words[i]]++;
+    } else {
+      wordFrequencies[words[i]] = 1;
+    }
+  }
+  let currentMaxKey = Object.keys(wordFrequencies)[0];
+  let currentMaxCount = wordFrequencies[currentMaxKey];
+  for (let word in wordFrequencies) {
+    if (wordFrequencies[word] > currentMaxCount) {
+      currentMaxKey = word;
+      currentMaxCount = wordFrequencies[word];
+    }
+  }
+  return currentMaxKey;
+}
+The breakdown:
+
+- The first function--
+
+-function getTokens(rawString)… This function is here filter the whole code to our liking. In the return request are the details for this filtering explained below.
+-rawString.toLowerCase… this a built in method is to make all the letters lower case. I assume in this code its to create uniformity and make it easier to sort.
+-.split(/[ ,!.";:-]+/)… this built in method separates each word so as not to return the whole string as a result.
+-.filter(Boolean)… “.filter” is used to remove the specified item or items from an array or string. And Boolean is how to find the true or false results. When used together these methods run through code removing unwanted null, undefined and Nan values
+-.sort()… built in method for returning words in alphabetical order.
+
+BOOM. First (and questionably the most difficult part of this assignment) function down! Now assuming I got all that right, here’s how the rest plays out---
+
+- The second function--
+
+-function mostFrequentWord(text)… This function is here to call the filtering function, create the path for the result and get result.
+-let words = getTokens(text)… Giving value to the filtered info, naming them “words”.
+-let wordFrequencies = {};… Naming the value to the amount of words to come.
+-for (let i = 0; i <= words.length; i++) {… This is a for/in loop and it loops through the properties of an object. This is where the filtered “words” get counted.
+    if (words[i] in wordFrequencies)
+      wordFrequencies[words[i]]++;
+    }
+-else {wordFrequencies[words[i]] = 1;}… If they do not meet the criteria they get the value of 1 instead of 0. Values of 1 don’t go any further than here.
+
+                                                                 
+
+-let currentMaxKey = Object.keys(wordFrequencies)[0]… Naming the “key”, creating a place for the information gathered to rest while the code is running.
+-let currentMaxCount = wordFrequencies[currentMaxKey]… Naming the counter for how many “words” are returned passing.
+-for (let word in wordFrequencies) {… Once the “words” are all filtered, sorted and counted this for/in loop will now take all the passing code and give it a final count.
+    if (wordFrequencies[word] > currentMaxCount) {
+      currentMaxKey = word;
+      currentMaxCount = wordFrequencies[word];
+    }
+-  return currentMaxKey… this is the final request for return, and in the last “if” statement this value was created for it.
